@@ -13,24 +13,23 @@ export async function getServerSideProps () {
     const userId = 343467;
     // set userId as the identifier
     const showSizeFlag = await configcatClient.getValueAsync(ffKey, false, { identifier: userId });
-    // add userId to the props object, we'll need it in the HomePage function later
+
     return { props: { showSizeFlag, ffKey, userId } };
 }
 
 
 export default function HomePage ( { showSizeFlag, ffKey, userId } ) {
-
     const amplitudeInstance = amplitude.getInstance().init("YOUR-API-KEY", userId);
 
     const identity = new amplitude.Identify();
-
+    // custom Amplitude user property
     identity.set(ffKey, showSizeFlag);
     amplitude.getInstance().identify(identity);
 
     function handleClick () {
         amplitude.getInstance(amplitudeInstance).logEvent('Download Button Clicked!');
     }
-    // markup here
+
     return (
         <div>
             <Head>
