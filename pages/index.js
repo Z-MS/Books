@@ -12,18 +12,18 @@ export async function getServerSideProps () {
     // the identifier should be a unique value like a username; I'm using a random number here
     const userId = 343467;
     // set userId as the identifier
-    const showSizeFlag = await configcatClient.getValueAsync(ffKey, false, { identifier: userId });
+    const showSizeEnabled = await configcatClient.getValueAsync(ffKey, false, { identifier: userId });
 
-    return { props: { showSizeFlag, ffKey, userId } };
+    return { props: { showSizeEnabled, ffKey, userId } };
 }
 
 
-export default function HomePage ( { showSizeFlag, ffKey, userId } ) {
+export default function HomePage ( { showSizeEnabled, ffKey, userId } ) {
     const amplitudeInstance = amplitude.getInstance().init("YOUR-API-KEY", userId);
 
     const identity = new amplitude.Identify();
     // custom Amplitude user property
-    identity.set(ffKey, showSizeFlag);
+    identity.set(ffKey, showSizeEnabled);
     amplitude.getInstance().identify(identity);
 
     function handleClick () {
@@ -45,7 +45,7 @@ export default function HomePage ( { showSizeFlag, ffKey, userId } ) {
                     />
                     <div className="button__area">       
                         <button id="download" onClick={handleClick}>
-                            Download PDF{ showSizeFlag &&<span> (5MB)</span>}
+                            Download PDF{ showSizeEnabled &&<span> (5MB)</span>}
                         </button>
                     </div>    
                 </div>
