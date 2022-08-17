@@ -45,7 +45,7 @@ export default function HomePage ( { showSizeEnabled, ffKey, userId } ) {
                     />
                     <div className="button__area">       
                         <button id="download" onClick={handleClick}>
-                            Download PDF{ showSizeEnabled &&<span> (5MB)</span>}
+                            Download PDF{ showSizeEnabled && <span>(5MB)</span> }
                         </button>
                     </div>    
                 </div>
@@ -79,8 +79,7 @@ export default function HomePage ( { showSizeEnabled, ffKey, userId } ) {
                     ul {
                         list-style: none;
                     }
-                `}
-                </style>
+                `}</style>
             </Layout>
         </div>
     );
