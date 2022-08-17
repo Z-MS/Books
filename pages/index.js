@@ -9,7 +9,7 @@ export async function getServerSideProps () {
     // feature flag key
     const ffKey = "showdownloadsize";
 
-    // the identifier should be a unique value like a username; I'm using a random number here
+    // ConfigCat requires a unique identifier when using targetting; I'm using a made-up number here
     const userId = 343467;
     // set userId as the identifier
     const showSizeEnabled = await configcatClient.getValueAsync(ffKey, false, { identifier: userId });
